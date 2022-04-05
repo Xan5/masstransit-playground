@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="Managed Code Custom Rules" ToolsVersion="15.0">
+  <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
+    <Rule Id="SA0001" Action="None"/> <!-- XML docs analysis -->
+    <Rule Id="SA1028" Action="Error"/> <!-- A line of code ends with a space, tab, or other whitespace characters before the end of line character(s). -->
+    <Rule Id="SA1028" Action="Error"/> <!-- Multiple blank lines -->
+    <Rule Id="SA1101" Action="None"/> <!-- A call to an instance member of the local class or a base class is not prefixed with 'this.', within a C# code file. -->
+    <Rule Id="SA1200" Action="None"/> <!-- A C# using directive is placed outside of a namespace element -->
+    <Rule Id="SA1309" Action="None"/> <!-- A field name in C# begins with an underscore -->
+    <Rule Id="SA1507" Action="Error"/> <!-- Code must not contain multiple empty lines in a row -->
+    <Rule Id="SA1516" Action="None"/> <!-- Elements should be separated by a blank line -->
+    <Rule Id="SA1600" Action="None"/> <!-- A C# code element is missing a documentation header. -->
+    <Rule Id="SA1602" Action="None"/> <!-- Enumeration members should be documented -->
+    <Rule Id="SA1633" Action="None"/> <!-- A C# code file is missing a standard file header. -->
+    <Rule Id="SA1649" Action="None"/> <!-- Interface names should start with letter I -->
+  </Rules>
+  <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
+    <!--Following https://docs.microsoft.com/en-us/visualstudio/code-quality/managed-recommended-rules-rule-set-for-managed-code-->
+    <Rule Id="CA1001" Action="Error"/> <!--Types that own disposable fields should be disposable-->
+    <Rule Id="CA1009" Action="Error"/> <!--Declare event handlers correctly-->
+    <Rule Id="CA1016" Action="Error"/> <!--Mark assemblies with AssemblyVersionAttribute-->
+    <Rule Id="CA1033" Action="Error"/> <!--Interface methods should be callable by child types-->
+    <Rule Id="CA1049" Action="Error"/> <!--Types that own native resources should be disposable-->
+    <Rule Id="CA1060" Action="Error"/> <!--Move P/Invokes to NativeMethods class-->
+    <Rule Id="CA1061" Action="Error"/> <!--Do not hide base class methods-->
+    <Rule Id="CA1063" Action="Error"/> <!--Implement IDisposable correctly-->
+    <Rule Id="CA1065" Action="Error"/> <!--Do not raise exceptions in unexpected locations-->
+    <Rule Id="CA1067" Action="None"/> <!--Implement Equals if IEquatable (invalid for records) -->
+    <Rule Id="CA1301" Action="Error"/> <!--Avoid duplicate accelerators-->
+    <Rule Id="CA1400" Action="Error"/> <!--P/Invoke entry points should exist-->
+    <Rule Id="CA1401" Action="Error"/> <!--P/Invokes should not be visible-->
+    <Rule Id="CA1403" Action="Error"/> <!--Auto layout types should not be COM visible-->
+    <Rule Id="CA1404" Action="Error"/> <!--Call GetLastError immediately after P/Invoke-->
+    <Rule Id="CA1405" Action="Error"/> <!--COM visible type base types should be COM visible-->
+    <Rule Id="CA1410" Action="Error"/> <!--COM registration methods should be matched-->
+    <Rule Id="CA1415" Action="Error"/> <!--Declare P/Invokes correctly-->
+    <Rule Id="CA1821" Action="Error"/> <!--Remove empty finalizers-->
+    <Rule Id="CA1900" Action="Error"/> <!--Value type fields should be portable-->
+    <Rule Id="CA1901" Action="Error"/> <!--P/Invoke declarations should be portable-->
+    <Rule Id="CA2002" Action="Error"/> <!--Do not lock on objects with weak identity-->
+    <Rule Id="CA2100" Action="Error"/> <!--Review SQL queries for security vulnerabilities-->
+    <Rule Id="CA2101" Action="Error"/> <!--Specify marshaling for P/Invoke string arguments-->
+    <Rule Id="CA2108" Action="Error"/> <!--Review declarative security on value types-->
+    <Rule Id="CA2111" Action="Error"/> <!--Pointers should not be visible-->
+    <Rule Id="CA2112" Action="Error"/> <!--Secured types should not expose fields-->
+    <Rule Id="CA2114" Action="Error"/> <!--Method security should be a superset of type-->
+    <Rule Id="CA2116" Action="Error"/> <!--APTCA methods should only call APTCA methods-->
+    <Rule Id="CA2117" Action="Error"/> <!--APTCA types should only extend APTCA base types-->
+    <Rule Id="CA2122" Action="Error"/> <!--Do not indirectly expose methods with link demands-->
+    <Rule Id="CA2123" Action="Error"/> <!--Override link demands should be identical to base-->
+    <Rule Id="CA2124" Action="Error"/> <!--Wrap vulnerable finally clauses in outer try-->
+    <Rule Id="CA2126" Action="Error"/> <!--Type link demands require inheritance demands-->
+    <Rule Id="CA2131" Action="Error"/> <!--Security critical types may not participate in type equivalence-->
+    <Rule Id="CA2132" Action="Error"/> <!--Default constructors must be at least as critical as base type default constructors-->
+    <Rule Id="CA2133" Action="Error"/> <!--Delegates must bind to methods with consistent transparency-->
+    <Rule Id="CA2134" Action="Error"/> <!--Methods must keep consistent transparency when overriding base methods-->
+    <Rule Id="CA2137" Action="Error"/> <!--Transparent methods must contain only verifiable IL-->
+    <Rule Id="CA2138" Action="Error"/> <!--Transparent methods must not call methods with the SuppressUnmanagedCodeSecurity attribute-->
+    <Rule Id="CA2140" Action="Error"/> <!--Transparent code must not reference security critical items-->
+    <Rule Id="CA2141" Action="Error"/> <!--Transparent methods must not satisfy LinkDemands-->
+    <Rule Id="CA2146" Action="Error"/> <!--Types must be at least as critical as their base types and interfaces-->
+    <Rule Id="CA2147" Action="Error"/> <!--Transparent methods may not use security asserts-->
+    <Rule Id="CA2149" Action="Error"/> <!--Transparent methods must not call into native code-->
+    <Rule Id="CA2200" Action="Error"/> <!--Rethrow to preserve stack details-->
+    <Rule Id="CA2202" Action="Error"/> <!--Do not dispose objects multiple times-->
+    <Rule Id="CA2207" Action="Error"/> <!--Initialize value type static fields inline-->
+    <Rule Id="CA2212" Action="Error"/> <!--Do not mark serviced components with WebMethod-->
+    <Rule Id="CA2213" Action="Error"/> <!--Disposable fields should be disposed-->
+    <Rule Id="CA2214" Action="Error"/> <!--Do not call overridable methods in constructors-->
+    <Rule Id="CA2216" Action="Error"/> <!--Disposable types should declare finalizer-->
+    <Rule Id="CA2220" Action="Error"/> <!--Finalizers should call base class finalizer-->
+    <Rule Id="CA2229" Action="Error"/> <!--Implement serialization constructors-->
+    <Rule Id="CA2231" Action="Error"/> <!--Overload operator equals on overriding ValueType.Equals-->
+    <Rule Id="CA2232" Action="Error"/> <!--Mark Windows Forms entry points with STAThread-->
+    <Rule Id="CA2235" Action="Error"/> <!--Mark all non-serializable fields-->
+    <Rule Id="CA2236" Action="Error"/> <!--Call base class methods on ISerializable types-->
+    <Rule Id="CA2237" Action="Error"/> <!--Mark ISerializable types with SerializableAttribute-->
+    <Rule Id="CA2238" Action="Error"/> <!--Implement serialization methods correctly-->
+    <Rule Id="CA2240" Action="Error"/> <!--Implement ISerializable correctly-->
+    <Rule Id="CA2241" Action="Error"/> <!--Provide correct arguments to formatting methods-->
+    <Rule Id="CA2242" Action="Error"/> <!--Test for NaN correctly-->
+  </Rules>
+  <Rules AnalyzerId="Microsoft.Analyzers.NativeCodeAnalysis" RuleNamespace="Microsoft.Rules.Native">
+  </Rules>
+  <Rules AnalyzerId="Microsoft.CodeAnalysis.CSharp" RuleNamespace="Microsoft.CodeAnalysis.CSharp">
+  </Rules>
+  <Rules AnalyzerId="Microsoft.CodeAnalysis.CSharp.EditorFeatures" RuleNamespace="Microsoft.CodeAnalysis.CSharp.EditorFeatures">
+  </Rules>
+  <Rules AnalyzerId="Microsoft.CodeAnalysis.CSharp.Features" RuleNamespace="Microsoft.CodeAnalysis.CSharp.Features">
+  </Rules>
+</RuleSet>
