@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Events;
 using MassTransit;
@@ -12,13 +13,16 @@ public class BasketController : ControllerBase
 {
     private readonly ILogger<BasketController> _logger;
     private readonly IPublishEndpoint _publishEndpoint;
+    private readonly IDocumentTemplateRepository _repository;
 
     public BasketController(
         ILogger<BasketController> logger,
-        IPublishEndpoint publishEndpoint)
+        IPublishEndpoint publishEndpoint,
+        IDocumentTemplateRepository repository)
     {
         _logger = logger;
         _publishEndpoint = publishEndpoint;
+        _repository = repository;
     }
 
     [HttpPost("customers/{customerId:guid}/orders/{orderId:guid}")]
@@ -35,6 +39,19 @@ public class BasketController : ControllerBase
             new BuyOrderPlacedEvent(orderId, customerId));
 
         return Accepted();
+    }
+
+    [HttpPost("documents/{documentId:guid}")]
+    public async Task<IActionResult> TestMeAsync(Guid documentId, CancellationToken cancellationToken)
+    {
+        var documentTemplate = await _repository.GetById(documentId, cancellationToken);
+
+        if (documentTemplate is null)
+        {
+            return NotFound();
+        }
+
+        return Ok(documentTemplate);
     }
 
     private record BuyOrderPlacedEvent(Guid OrderId, Guid CustomerId) : BuyOrderPlaced;
