@@ -5,7 +5,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Shop;
-using Shop.Sagas;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,20 +18,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddMassTransit(
     massTransit =>
     {
-        // massTransit.UsingRabbitMq(
-        //     (context, rabbitCfg) =>
-        //     {
-        //         rabbitCfg.Host(
-        //             "127.0.0.1",
-        //             "/",
-        //             host =>
-        //             {
-        //                 host.Username("rabbituser");
-        //                 host.Password("rabbitpassword");
-        //             });
-        //
-        //         rabbitCfg.ConfigureEndpoints(context);
-        //     });
+        massTransit.SetKebabCaseEndpointNameFormatter();
 
         massTransit.UsingAzureServiceBus((context, azure) =>
         {
@@ -42,14 +28,6 @@ builder.Services.AddMassTransit(
 
         massTransit.AddRequestClient<GetDocumentTemplateMetadataRequest>();
         massTransit.AddRequestClient<GetDocumentLaterValueRequest>();
-
-        massTransit.AddSagaStateMachine<OrderPurchasingStateMachine, OrderPurchasingState>()
-           .MongoDbRepository(
-                mongoConfiguration =>
-                {
-                    mongoConfiguration.Connection = "mongodb://mongouser:mongopassword@127.0.0.1:27017/";
-                    mongoConfiguration.DatabaseName = "shop-sagas";
-                });
     });
 
 builder.Services.AddScoped<IDocumentTemplateRepository, FileStorageServiceBasedDocumentTemplateRepository>();

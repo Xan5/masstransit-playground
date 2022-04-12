@@ -9,27 +9,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMassTransit(
     massTransit =>
     {
-        // massTransit.UsingRabbitMq(
-        //     (context, rabbitCfg) =>
-        //     {
-        //         rabbitCfg.Host(
-        //             "127.0.0.1",
-        //             "/",
-        //             host =>
-        //             {
-        //                 host.Username("rabbituser");
-        //                 host.Password("rabbitpassword");
-        //             });
-        //
-        //         rabbitCfg.ConfigureEndpoints(context);
-        //     });
+        massTransit.SetKebabCaseEndpointNameFormatter();
         massTransit.UsingAzureServiceBus((context, azure) =>
         {
             azure.Host(builder.Configuration.GetConnectionString("AzureServiceBus"));
             azure.ConfigureEndpoints(context);
         });
 
-        massTransit.AddConsumers(typeof(AmountProvisioningRequestedConsumer).Assembly);
+        massTransit.AddConsumers(typeof(ConsumersMarker).Assembly);
     });
 
 var app = builder.Build();
