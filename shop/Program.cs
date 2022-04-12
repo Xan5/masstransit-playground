@@ -1,6 +1,8 @@
+using System;
 using Events;
 using MassTransit;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Azure.Cosmos.Table;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -44,12 +46,20 @@ builder.Services.AddMassTransit(
         massTransit.AddRequestClient<GetDocumentLaterValueRequest>();
 
         massTransit.AddSagaStateMachine<OrderPurchasingStateMachine, OrderPurchasingState>()
-           .MongoDbRepository(
-                mongoConfiguration =>
-                {
-                    mongoConfiguration.Connection = "mongodb://mongouser:mongopassword@127.0.0.1:27017/";
-                    mongoConfiguration.DatabaseName = "shop-sagas";
-                });
+            .AzureTableRepository(sagaConfig =>
+            {
+                sagaConfig.ConnectionFactory(() => new CloudTable(
+                    new Uri("https:/test"),
+                    new StorageCredentials()));
+            });
+
+        massTransit.AddSagaStateMachine<TestStateMachine, TestState>()
+            .AzureTableRepository(sagaConfig =>
+            {
+                sagaConfig.ConnectionFactory(() => new CloudTable(
+                    new Uri("https:/test"),
+                    new StorageCredentials()));
+            });
     });
 
 builder.Services.AddScoped<IDocumentTemplateRepository, FileStorageServiceBasedDocumentTemplateRepository>();
